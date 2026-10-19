@@ -1,0 +1,18 @@
+#card {
+    background-color: #3c4043;
+    border-radius: 20px;
+    padding: 0px;
+}
+
+QLabel#title_label {
+    background-color: #2e3134;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    color: #9aa0a6;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+QLabel#value_label {
+    font-size: 20px;
+}
