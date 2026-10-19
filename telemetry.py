@@ -32,15 +32,15 @@ class Telemetry:
             altitude=0,
             speed=0,
             heading=0,
-            x=uniform(0, 100.0),
-            y=uniform(0, 100.0),
+            x=0,
+            y=0,
             battery=100.0,
             time=time(),
         )
 
     def update(self) -> None:
         self.packet.altitude = max(
-            50.0, min(150.0, self.packet.altitude + uniform(-0.5, 0.5))
+            100.0, min(150.0, self.packet.altitude + uniform(-0.5, 0.5))
         )
 
         self.packet.speed = max(10.0, min(20.0, self.packet.speed + uniform(-2.0, 2.0)))
