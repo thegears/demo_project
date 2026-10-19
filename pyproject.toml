@@ -8,7 +8,6 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
-    "numpy>=2.5.4",
     "pydantic>=2.14.1",
     "pyqt5>=5.15.11",
     "pyqtdarktheme>=2.1.0",
@@ -28,3 +27,8 @@ package = false
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
+
+[dependency-groups]
+dev = [
+    "pyinstaller>=6.22.3",
+]

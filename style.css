@@ -1,7 +1,7 @@
 #card {
     background-color: #1e1f22;
     border-radius: 10px;
-    border: 1px solid #2e3135; /* İnce zarif çerçeve */
+    border: 1px solid #2e3135;
     padding: 12px;
 }
 
@@ -20,16 +20,16 @@
 QLabel#title_label {
     font-size: 11px;
     font-weight: 600;
-    color: #94a3b8; /* Soluk gri */
-    background: transparent; /* Arka planındaki o koyu şeridi kaldırır */
+    color: #94a3b8;
+    background: transparent;
     border: none;
     text-transform: uppercase;
 }
 
 QLabel#value_label {
-    font-size: 20px; /* Koordinat kutusuna sığması için 18-20px ideal */
+    font-size: 20px;
     font-weight: 700;
-    color: #f8fafc; /* Parlak beyaz */
+    color: #f8fafc;
     background: transparent;
     border: none;
 }

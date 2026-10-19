@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget
@@ -14,8 +16,9 @@ class RightLayout(QGridLayout):
         self.setContentsMargins(24, 0, 24, 0)
 
         image = QLabel()
-        pixmap = QPixmap("logo.png")
-        image.setPixmap(pixmap)
+        logo_path = str(Path(__file__).resolve().parent.parent / "logo.png")
+        image.setPixmap(QPixmap(logo_path))
+
         image.setScaledContents(True)
         image.setFixedSize(200, 200)
         self.addWidget(image, 0, 0, 1, 2, Qt.AlignmentFlag.AlignCenter)

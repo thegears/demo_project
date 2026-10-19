@@ -2,18 +2,13 @@ import sys
 from pathlib import Path
 from random import uniform
 
-import numpy as np
-import pyqtgraph as pg
 import qdarktheme
 from PyQt5.QtCore import QFileSystemWatcher, QTimer
 from PyQt5.QtWidgets import (
     QApplication,
-    QCheckBox,
-    QFrame,
     QHBoxLayout,
     QLabel,
     QMainWindow,
-    QVBoxLayout,
     QWidget,
 )
 
@@ -55,19 +50,15 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
         main_layout = QHBoxLayout(central_widget)
 
-        # TODO: Sol tarafa harita (pg.PlotWidget) ve katman checkbox'larını ekle
-        #
+        
         self.left_layout = LeftLayout(self.red_zones)
 
-        # TODO: Sağ tarafa dikey panel (QLabel'lar) ekle
-        #
+        
         self.right_layout = RightLayout(self.packet, self.red_zones)
         self.altitude = QLabel()
         self.speed = QLabel()
         self.battery = QLabel()
 
-        # TODO: Harita üzerine HSS dairesi, iz çizgisi ve İHA noktasını çizip referanslarını tut
-        # TODO: Checkbox toggled sinyallerini ilgili çizimlerin setVisible metoduna bağla
 
         main_layout.addLayout(self.left_layout, 3)
         main_layout.addLayout(self.right_layout, 1)
@@ -86,17 +77,16 @@ class MainWindow(QMainWindow):
         self.right_layout.update_data(self.packet, self.red_zones)
 
         self.left_layout.update_own_plane_data(self.packet)
-        self.left_layout.update_target_planes_data([target_plane.get_packet() for target_plane in self.target_planes])
-
-        # TODO: Haritadaki iz ve İHA çizimlerinin verisini setData ile güncelle
-        # TODO: Sağ paneldeki etiketleri (irtifa, hız, koordinat) f-string ile güncelle
-        # TODO: HSS is_inside kontrolü yap ve duruma göre uyarı etiketini güncelle
+        self.left_layout.update_target_planes_data(
+            [target_plane.get_packet() for target_plane in self.target_planes]
+        )
 
 
-def hot_reload(app, path="style.css"):
-    style_path = Path(__file__).with_name(path)
-    style = style_path.read_text(encoding="utf-8")
-    qdarktheme.setup_theme("dark", additional_qss=style)
+
+# def hot_reload(app, path="style.css"):
+#     style_path = Path(__file__).with_name(path)
+#     style = style_path.read_text(encoding="utf-8")
+#     qdarktheme.setup_theme("dark", additional_qss=style)
 
 
 if __name__ == "__main__":
@@ -106,8 +96,8 @@ if __name__ == "__main__":
     style = style_path.read_text(encoding="utf-8")
     qdarktheme.setup_theme("dark", additional_qss=style)
 
-    watcher = QFileSystemWatcher(["style.css"])
-    watcher.fileChanged.connect(lambda: hot_reload(app))
+    # watcher = QFileSystemWatcher(["style.css"])
+    # watcher.fileChanged.connect(lambda: hot_reload(app))
 
     pencere = MainWindow()
     pencere.show()
