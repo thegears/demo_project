@@ -3,11 +3,10 @@ from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout
 
 
 class Card(QFrame):
-    def __init__(self, title: str, value: float):
+    def __init__(self, title: str):
         super().__init__()
 
         self.setObjectName("card")
-        self.setFixedSize(200, 100)
 
         card_layout = QVBoxLayout(self)
         card_layout.setContentsMargins(0, 0, 0, 0)
@@ -20,10 +19,8 @@ class Card(QFrame):
         self.value_label.setObjectName("value_label")
         self.value_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.update_data(value)
-
         card_layout.addWidget(title_label)
         card_layout.addWidget(self.value_label)
 
-    def update_data(self, value: float):
-        self.value_label.setText(f"{value:.2f}")
+    def update_data(self, value: str):
+        self.value_label.setText(value)

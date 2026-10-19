@@ -21,7 +21,7 @@ class RedZone(BaseModel):
     y: float
     radius: float
 
-    def is_inside(self, target_x: float, target_y: float):
+    def check_is_inside(self, target_x: float, target_y: float):
         distance = math.hypot(self.x - target_x, self.y - target_y)
         return distance <= self.radius
 

@@ -1,18 +1,35 @@
 #card {
-    background-color: #3c4043;
-    border-radius: 20px;
-    padding: 0px;
+    background-color: #1e1f22;
+    border-radius: 10px;
+    border: 1px solid #2e3135; /* İnce zarif çerçeve */
+    padding: 12px;
+}
+
+#card:hover {
+    border: 1px solid #3b8276;
+}
+
+#card[is_inside="false"] {
+    border: 2px solid #22c55e;
+}
+
+#card[is_inside="true"] {
+    border: 2px solid #ef4444;
 }
 
 QLabel#title_label {
-    background-color: #2e3134;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    color: #9aa0a6;
-    font-size: 30px;
-    font-weight: bold;
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8; /* Soluk gri */
+    background: transparent; /* Arka planındaki o koyu şeridi kaldırır */
+    border: none;
+    text-transform: uppercase;
 }
 
 QLabel#value_label {
-    font-size: 20px;
+    font-size: 20px; /* Koordinat kutusuna sığması için 18-20px ideal */
+    font-weight: 700;
+    color: #f8fafc; /* Parlak beyaz */
+    background: transparent;
+    border: none;
 }

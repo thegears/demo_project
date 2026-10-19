@@ -26,7 +26,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("SİHA ARAYÜZ DEMO")
-        self.resize(1000, 700)
+        self.setFixedSize(1200, 700)
 
         self.own_plane = Telemetry()
         self.packet: Packet = self.own_plane.get_packet()
@@ -50,7 +50,7 @@ class MainWindow(QMainWindow):
 
         # TODO: Sağ tarafa dikey panel (QLabel'lar) ekle
         #
-        self.right_layout = RightLayout(self.packet)
+        self.right_layout = RightLayout(self.packet, self.red_zones)
         self.altitude = QLabel()
         self.speed = QLabel()
         self.battery = QLabel()
@@ -69,7 +69,7 @@ class MainWindow(QMainWindow):
 
         self.own_plane.update()
         self.packet = self.own_plane.get_packet()
-        self.right_layout.update_data(self.packet)
+        self.right_layout.update_data(self.packet, self.red_zones)
 
         # TODO: Haritadaki iz ve İHA çizimlerinin verisini setData ile güncelle
         # TODO: Sağ paneldeki etiketleri (irtifa, hız, koordinat) f-string ile güncelle
