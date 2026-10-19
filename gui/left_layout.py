@@ -37,7 +37,7 @@ class SimulationView(pg.PlotWidget):
             self.setXRange(0, 1000)
             self.setYRange(0, 1000)
         else:
-            self.toggle_view_mode_button.setText("Takip ediliyor")
+            self.toggle_view_mode_button.setText("Takibi bırak")
 
     def draw_red_zone(
         self, x: float, y: float, radius: float, color: tuple[int, int, int], label: str
