@@ -12,6 +12,7 @@ class RightLayout(QGridLayout):
         super().__init__()
 
         self.setContentsMargins(24, 0, 24, 0)
+
         image = QLabel()
         pixmap = QPixmap("logo.png")
         image.setPixmap(pixmap)
@@ -40,12 +41,18 @@ class RightLayout(QGridLayout):
         self.altitude_card.update_data(f"{packet.altitude:.2f}")
         self.speed_card.update_data(f"{packet.speed:.2f}")
         self.battery_card.update_data(f"{packet.battery:.2f}")
-        self.coordinate_card.update_data(f"{packet.x:.2f},{packet.y:.2f}")
+        self.coordinate_card.update_data(f"{packet.x:.2f} , {packet.y:.2f}")
 
         is_inside = False
         for zone in red_zones:
             if zone.check_is_inside(packet.x, packet.y):
                 is_inside = True
+                break
 
-        self.check_zone_card.setProperty("is_inside", is_inside)
-        self.check_zone_card.update_data("EVET" if is_inside else "HAYIR")
+        current_is_inside = self.check_zone_card.property("is_inside")
+        if current_is_inside != is_inside:
+            self.check_zone_card.setProperty("is_inside", is_inside)
+            if (style := self.check_zone_card.style()) is not None:
+                style.unpolish(self.check_zone_card)
+                style.polish(self.check_zone_card)
+            self.check_zone_card.update_data("EVET" if is_inside else "HAYIR")

@@ -29,8 +29,8 @@ class RedZone(BaseModel):
 class Telemetry:
     def __init__(self) -> None:
         self.packet: Packet = Packet(
-            altitude=1200,
-            speed=20,
+            altitude=0,
+            speed=0,
             heading=0,
             x=uniform(0, 100.0),
             y=uniform(0, 100.0),
@@ -39,10 +39,13 @@ class Telemetry:
         )
 
     def update(self) -> None:
-        self.packet.altitude += uniform(-10.0, 10.0)
-        self.packet.speed += uniform(-3.0, 3.0)
+        self.packet.altitude = max(
+            50.0, min(150.0, self.packet.altitude + uniform(-0.5, 0.5))
+        )
 
-        self.packet.heading = (self.packet.heading + uniform(-5.0, 5.0)) % 360
+        self.packet.speed = max(3.0, min(20.0, self.packet.speed + uniform(-2.0, 2.0)))
+
+        self.packet.heading = (self.packet.heading + uniform(-10.0, 10.0)) % 360
 
         rad = math.radians(self.packet.heading)
 
