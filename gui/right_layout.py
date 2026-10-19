@@ -1,3 +1,5 @@
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget
 from pyqtgraph.Qt.QtWidgets import QGridLayout
 
@@ -9,6 +11,14 @@ class RightLayout(QGridLayout):
     def __init__(self, packet: Packet, red_zones: list[RedZone]):
         super().__init__()
 
+        self.setContentsMargins(24, 0, 24, 0)
+        image = QLabel()
+        pixmap = QPixmap("logo.png")
+        image.setPixmap(pixmap)
+        image.setScaledContents(True)
+        image.setFixedSize(200, 200)
+        self.addWidget(image, 0, 0, 1, 2, Qt.AlignmentFlag.AlignCenter)
+
         self.altitude_card = Card("İrtifa (m)")
         self.speed_card = Card("Hız (m/s)")
         self.battery_card = Card("Batarya (%)")
@@ -16,7 +26,7 @@ class RightLayout(QGridLayout):
         self.check_zone_card = Card("Alanın içinde mi ?")
 
         self.update_data(packet, red_zones)
-        self.setRowStretch(0, 1)
+        self.setRowStretch(0, 3)
 
         self.addWidget(self.altitude_card, 1, 0)
         self.addWidget(self.speed_card, 1, 1)
