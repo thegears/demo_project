@@ -32,8 +32,8 @@ class Telemetry:
             altitude=0,
             speed=0,
             heading=0,
-            x=0,
-            y=0,
+            x=uniform(0, 50.0),
+            y=uniform(0, 50.0),
             battery=100.0,
             time=time(),
         )
