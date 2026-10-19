@@ -15,9 +15,10 @@ class SimulationView(pg.PlotWidget):
         self.setAspectLocked(True)
         self.setMouseEnabled(x=False, y=False)
         self.hideButtons()
-        self.view_mode = "follow_plane"
-        toggle_view_mode_button = QPushButton("Uçağı takip et", self)
-        toggle_view_mode_button.move(self.width(), 20)
+        self.is_view_mode_follow = False
+        self.toggle_view_mode_button = QPushButton("Uçağı takip et", self)
+        self.toggle_view_mode_button.move(80, 20)
+        self.toggle_view_mode_button.clicked.connect(self.toggle_view)
 
         self.setLabel("bottom", "X (m)", color="#94a3b8")
         self.setLabel("left", "Y (m)", color="#94a3b8")
@@ -28,6 +29,15 @@ class SimulationView(pg.PlotWidget):
             )
 
         self.draw_planes()
+
+    def toggle_view(self):
+        self.is_view_mode_follow = not self.is_view_mode_follow
+        if not self.is_view_mode_follow:
+            self.toggle_view_mode_button.setText("Uçağı takip et")
+            self.setXRange(0, 1000)
+            self.setYRange(0, 1000)
+        else:
+            self.toggle_view_mode_button.setText("Takip ediliyor")
 
     def draw_red_zone(
         self, x: float, y: float, radius: float, color: tuple[int, int, int], label: str
@@ -74,7 +84,7 @@ class SimulationView(pg.PlotWidget):
     def update_own_plane_data(self, packet: Packet):
         self.own_plane.setPos(packet.x, packet.y)
         self.own_plane.setStyle(angle=90 + packet.heading)
-        if self.view_mode == "follow_plane":
+        if self.is_view_mode_follow:
             self.setXRange(packet.x - 200, packet.x + 200)
             self.setYRange(packet.y - 200, packet.y + 200)
 

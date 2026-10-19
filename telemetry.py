@@ -43,7 +43,7 @@ class Telemetry:
             50.0, min(150.0, self.packet.altitude + uniform(-0.5, 0.5))
         )
 
-        self.packet.speed = max(3.0, min(20.0, self.packet.speed + uniform(-2.0, 2.0)))
+        self.packet.speed = max(10.0, min(20.0, self.packet.speed + uniform(-2.0, 2.0)))
 
         self.packet.heading = (self.packet.heading + uniform(-10.0, 10.0)) % 360
 
